@@ -5,6 +5,7 @@ const app = Vue.createApp({
         return {
             emailList: [],
             emailNumber: 10,
+            emailToAdd: 1,
             errorMessage: ''
         }
     },
@@ -18,7 +19,6 @@ const app = Vue.createApp({
     },
     methods:{
         getEmailAddresses(number){
-            this.isLoading = true;
             for(i=0; i < number; i++){
                 axios.get('https://flynn.boolean.careers/exercises/api/random/mail').then( response => {
                     const email = response.data.response;
@@ -28,10 +28,29 @@ const app = Vue.createApp({
                     this.isLoading = false;
                 })
             }
+        },
+        addEmail(number){
+            if(number < 1){
+                this.$refs.emailField.focus();
+                return
+            } else{
+                this.emailNumber += number;
+                this.getEmailAddresses(number);
+                this.emailToAdd = 1;
+            }
         }
     },
     mounted(){
         this.getEmailAddresses(this.emailNumber);
+    },
+    watch: {
+        isLoading(Value) {
+            if (!Value) {
+                this.$nextTick(() => {
+                    this.$refs.emailField.focus();
+                });
+            }
+        }
     }
 
 });
