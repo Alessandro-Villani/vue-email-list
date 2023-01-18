@@ -28,10 +28,15 @@
             </div>
             <div class="row flex-grow-1">
                 <div class="col-6 m-auto">
-                    <h1 class="text-center mb-3">EMAIL LIST</h1>
-                    <ul v-if="!isLoading" class="list-group text-center">
-                        <li v-for="email in emailList" class="list-group-item list-group-item-dark">{{ email }}</li>
-                    </ul>
+                    <div v-if="errorMessage" class="error">
+                        <div class="alert alert-danger text-center h2">{{ errorMessage }}</div>
+                    </div>
+                    <div v-if="!isLoading && !errorMessage" class="emails">
+                        <h1 class="text-center mb-3">EMAIL LIST</h1>
+                        <ul class="list-group text-center">
+                            <li v-for="email in emailList" class="list-group-item list-group-item-dark">{{ email }}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

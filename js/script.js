@@ -4,7 +4,8 @@ const app = Vue.createApp({
     data(){
         return {
             emailList: [],
-            isLoading: false
+            isLoading: false,
+            errorMessage: ''
         }
     },
     computed:{
@@ -19,7 +20,10 @@ const app = Vue.createApp({
                 axios.get('https://flynn.boolean.careers/exercises/api/random/mail').then( response => {
                     const email = response.data.response;
                     this.emailList.push(email);
-                }).catch(error => {}).then(() => {
+                }).catch(error => {
+                    this.errorMessage = error.message;
+                    this.isLoading = false;
+                }).then(() => {
                     const wait = setInterval(() => {
                         if(this.emailList.length === number){
                             this.isLoading = false;
