@@ -4,13 +4,16 @@ const app = Vue.createApp({
     data(){
         return {
             emailList: [],
-            isLoading: false,
+            emailNumber: 10,
             errorMessage: ''
         }
     },
     computed:{
         emailListLength(){
             return this.emailList.length;
+        },
+        isLoading(){
+            return this.emailListLength < this.emailNumber;
         }
     },
     methods:{
@@ -23,19 +26,12 @@ const app = Vue.createApp({
                 }).catch(error => {
                     this.errorMessage = error.message;
                     this.isLoading = false;
-                }).then(() => {
-                    const wait = setInterval(() => {
-                        if(this.emailList.length === number){
-                            this.isLoading = false;
-                            clearInterval(wait);
-                        }
-                    }, 10)
                 })
             }
         }
     },
     mounted(){
-        this.getEmailAddresses(10);
+        this.getEmailAddresses(this.emailNumber);
     }
 
 });
