@@ -8,6 +8,8 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js' integrity='sha512-L4lHq2JI/GoKsERT8KYa72iCwfSrKYWEyaBxzJeeITM9Lub5vlTj8tufqYk056exhjo2QDEipJrg6zen/DDtoQ==' crossorigin='anonymous'></script>
     <!-- VUE -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- FONTAWESOME -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.css' integrity='sha512-FA9cIbtlP61W0PRtX36P6CGRy0vZs0C2Uw26Q1cMmj3xwhftftymr0sj8/YeezDnRwL9wtWw8ZwtCiTDXlXGjQ==' crossorigin='anonymous'/>
     <!-- BOOTSTRAP -->
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css' integrity='sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==' crossorigin='anonymous'/>
     <!-- STYLESHEET -->
@@ -18,16 +20,18 @@
 <body>
     <main id="root">
         <div class="container d-flex align-content-center">
+            <div v-if="isLoading" class="loader d-flex align-items-center justify-content-center">
+                <div class="loader-space d-flex flex-column align-items-center justify-content-center">
+                    <h3 class="mb-3">LOADING</h3>
+                    <i class="fa-solid fa-spinner fa-spin fa-4x"></i>
+                </div>
+            </div>
             <div class="row flex-grow-1">
                 <div class="col-6 m-auto">
                     <h1 class="text-center mb-3">EMAIL LIST</h1>
-                    <ul class="list-group text-center">
-                        <li class="list-group-item list-group-item-dark">An item</li>
-                        <li class="list-group-item list-group-item-dark">A second item</li>
-                        <li class="list-group-item list-group-item-dark">A third item</li>
-                        <li class="list-group-item list-group-item-dark">A fourth item</li>
-                        <li class="list-group-item list-group-item-dark">And a fifth one</li>
-                      </ul>
+                    <ul v-if="!isLoading" class="list-group text-center">
+                        <li v-for="email in emailList" class="list-group-item list-group-item-dark">{{ email }}</li>
+                    </ul>
                 </div>
             </div>
         </div>

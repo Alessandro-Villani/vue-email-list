@@ -1,4 +1,21 @@
 #root .container{
     height: 100vh;
     background-color: burlywood;
+    position: relative;
+}
+
+.loader{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 1;
+}
+
+.loader-space{
+    height: 80%;
+    width: 80%;
+    background-color: white;
 }
