@@ -5,7 +5,7 @@ const app = Vue.createApp({
         return {
             emailList: [],
             emailNumber: 10,
-            emailToAdd: 1,
+            emailToAdd: null,
             errorMessage: ''
         }
     },
