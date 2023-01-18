@@ -38,6 +38,10 @@ const app = Vue.createApp({
                 this.getEmailAddresses(number);
                 this.emailToAdd = 1;
             }
+        },
+        removeEmail(i){
+            this.emailNumber--
+            this.emailList.splice(i, 1);
         }
     },
     mounted(){
